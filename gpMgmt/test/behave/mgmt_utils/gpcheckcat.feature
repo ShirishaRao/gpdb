@@ -712,8 +712,8 @@ Feature: gpcheckcat tests
 # GPDB_12_MERGE_FIXME:
 # 1, this case is removed because 12 partitioning implementation will not record pg_constraint, right?
 # 2, gpcheckcat in the concourse only runs 1 or 2 tests, how about merging into another task?
-#
     @demo_cluster
+    @concourse_cluster
     Scenario Outline: gpcheckcat should discover missing attributes for external tables
         Given database "miss_attr_db3" is dropped and recreated
         And the user runs "echo > /tmp/backup_gpfdist_dummy"
