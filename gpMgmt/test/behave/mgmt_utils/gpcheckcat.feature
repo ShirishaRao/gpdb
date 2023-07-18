@@ -690,7 +690,7 @@ Feature: gpcheckcat tests
 ########################### @concourse_cluster tests ###########################
 # The @concourse_cluster tag denotes the scenario that requires a remote cluster
 
-    @concourse_cluster
+    @shirisha_test
     Scenario Outline: gpcheckcat should discover missing attributes for external tables
         Given database "miss_attr_db3" is dropped and recreated
         And the user runs "echo > /tmp/backup_gpfdist_dummy"
