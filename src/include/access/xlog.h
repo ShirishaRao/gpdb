@@ -212,8 +212,12 @@ typedef enum WalLevel
 } WalLevel;
 extern int	wal_level;
 
+extern int wal_sender_archiving_status_interval;
 #define XLogArchivingActive()	(XLogArchiveMode && wal_level >= WAL_LEVEL_ARCHIVE)
 #define XLogArchiveCommandSet() (XLogArchiveCommand[0] != '\0')
+/* Is WAL archiving status streaming enabled? */
+#define XLogArchivingStatusReportingActive() \
+	(XLogArchivingActive() && wal_sender_archiving_status_interval > 0)
 
 /*
  * Is WAL-logging necessary for archival or log-shipping, or can we skip
