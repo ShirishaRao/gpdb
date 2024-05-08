@@ -557,6 +557,7 @@ These parameters control the configuration of the replication between Greenplum 
 - [wal_compression](guc-list.html#wal_compression)
 - [wal_keep_size](guc-list.html#wal_keep_size)
 - [wal_receiver_status_interval](guc-list.html#wal_receiver_status_interval)
+- [wal_sender_archiving_status_interval](guc-list.html#wal_sender_archiving_status_interval)
 
 ## <a id="topic56"></a>Greenplum PL/Java Parameters 
 
