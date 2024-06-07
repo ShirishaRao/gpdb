@@ -126,13 +126,8 @@ $node_primary->safe_psql(
 	SELECT pg_reload_conf();
 });
 
-# Wait until all the failed files get archived by the primary
-$node_primary->poll_query_until('postgres',"SELECT archived_count=failed_count FROM pg_stat_archiver", 't')
-  or die "Timed out while waiting for archiving to finish";
-
 # Check if primary has .done file created for the archived segment and also that the file gets uploaded to the archive
-ok( -f "$primary_data/$walfile_done2",
-	".done file exists for WAL segment $current_walfile2");
+wait_until_file_exists($node_primary, "$primary_data/$walfile_done2", ".done file to exist on primary for WAL segment $current_walfile2");
 ok( !-f "$primary_data/$walfile_ready2",
 	".ready file does not exist for WAL segment $current_walfile2");
 ok( -f $node_primary->archive_dir . "/$current_walfile2",
@@ -144,7 +139,6 @@ wait_until_file_exists($node_standby, "$standby_data/$walfile_done2",
 );
 ok( !-f "$standby_data/$walfile_ready2",
 	".ready file does not exist on standby for WAL segment $current_walfile2");
-
 ok( !-f $node_standby->archive_dir . "/$current_walfile2",
 	"$current_walfile2 does not exist in standby's archive");
 
